@@ -88,6 +88,8 @@ interface BaseStyleProps {
 }
 
 const BaseButton = styled(Button)<ThemeProp & BaseStyleProps>`
+  box-sizing: border-box;
+  width: 100%;
   height: 100%;
   background-image: none !important;
   font-weight: 400;
@@ -311,6 +313,7 @@ function PopoverTargetButton(props: PopoverTargetButtonProps) {
       buttonColor={buttonColor}
       buttonVariant={buttonVariant}
       compactMode={compactMode}
+      data-testid="t--table-menu-button"
       disabled={isDisabled}
       fill
       icon={iconAlign !== Alignment.RIGHT ? iconName : undefined}
