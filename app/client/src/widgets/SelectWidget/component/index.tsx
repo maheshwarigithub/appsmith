@@ -36,6 +36,7 @@ interface SelectComponentState {
   isOpen?: boolean;
 }
 
+/** Select widget view that renders labels, filtering, and dropdown interactions. */
 class SelectComponent extends React.Component<
   SelectComponentProps,
   SelectComponentState
@@ -391,6 +392,7 @@ class SelectComponent extends React.Component<
             fontSize={labelTextSize}
             fontStyle={labelStyle}
             helpText={labelTooltip}
+            isRequired={this.props.isRequired}
             isDynamicHeightEnabled={isDynamicHeightEnabled}
             loading={isLoading}
             position={labelPosition}

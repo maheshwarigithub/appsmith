@@ -26,6 +26,7 @@ import {
 } from "components/constants";
 import LabelWithTooltip from "widgets/components/LabelWithTooltip";
 
+/** Renders the selected-state icon used for multi-select menu rows. */
 const menuItemSelectedIcon = (props: { isSelected: boolean }) => {
   return <StyledCheckbox checked={props.isSelected} />;
 };
@@ -51,6 +52,7 @@ export interface MultiSelectProps
   labelTextColor?: string;
   labelTextSize?: TextSize;
   labelStyle?: string;
+  isRequired?: boolean;
   compactMode: boolean;
   isValid: boolean;
   allowSelectAll?: boolean;
@@ -65,6 +67,7 @@ export interface MultiSelectProps
 
 const DEBOUNCE_TIMEOUT = 800;
 
+/** Multi-select widget view with required-label support and optional select-all behavior. */
 function MultiSelectComponent({
   allowSelectAll,
   compactMode,
@@ -73,6 +76,7 @@ function MultiSelectComponent({
   dropDownWidth,
   isDynamicHeightEnabled,
   isValid,
+  isRequired,
   labelAlignment,
   labelPosition,
   labelStyle,
@@ -202,6 +206,7 @@ function MultiSelectComponent({
           disabled={disabled}
           fontSize={labelTextSize}
           fontStyle={labelStyle}
+          isRequired={isRequired}
           isDynamicHeightEnabled={isDynamicHeightEnabled}
           loading={loading}
           position={labelPosition}

@@ -54,6 +54,7 @@ export interface TreeSelectProps
   labelTextSize?: TextSize;
   labelStyle?: string;
   labelTooltip?: string;
+  isRequired?: boolean;
   compactMode: boolean;
   dropDownWidth: number;
   width: number;
@@ -73,6 +74,7 @@ export const NoDataFoundContainer = styled.div`
   text-align: center;
 `;
 
+/** Returns the expand/collapse chevron for a tree node switcher. */
 const getSvg = (expanded: boolean) => (
   <i
     style={{
@@ -92,6 +94,7 @@ const getSvg = (expanded: boolean) => (
   </i>
 );
 
+/** Renders the tree switcher icon while keeping leaf rows aligned. */
 const switcherIcon = (treeNode: TreeNodeProps) => {
   if (treeNode.isLeaf) {
     return (
@@ -109,6 +112,7 @@ const switcherIcon = (treeNode: TreeNodeProps) => {
   return getSvg(treeNode.expanded);
 };
 
+/** Tree-based multi-select widget view with optional filtering and required-label support. */
 function MultiTreeSelectComponent({
   accentColor,
   allowClear,
@@ -122,6 +126,7 @@ function MultiTreeSelectComponent({
   filterText,
   isDynamicHeightEnabled,
   isFilterable,
+  isRequired,
   isValid,
   labelAlignment,
   labelPosition,
@@ -260,6 +265,7 @@ function MultiTreeSelectComponent({
           fontSize={labelTextSize}
           fontStyle={labelStyle}
           helpText={labelTooltip}
+          isRequired={isRequired}
           isDynamicHeightEnabled={isDynamicHeightEnabled}
           loading={loading}
           position={labelPosition}
