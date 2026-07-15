@@ -10991,10 +10991,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/virtual-core@npm:^3.0.0-beta.18":
-  version: 3.0.0-beta.18
-  resolution: "@tanstack/virtual-core@npm:3.0.0-beta.18"
-  checksum: fbf73de3c9cc296a14b262258e6c8da4826c744fc7ce98669b1c2692341313ffa4e34a13d20c3980f23b340720d7c771136b7f2673aa91d14558ddc086b92d1c
+"@tanstack/virtual-core@npm:^3.17.4":
+  version: 3.17.4
+  resolution: "@tanstack/virtual-core@npm:3.17.4"
+  checksum: fa4e56c6fe12112610676931d1ac7adc63f6d4e2859fa0e00c90b4448be766f2c21e8dc113299d887ca1f3e09d1ad39c88a482767a942596efe87be27d737dd9
   languageName: node
   linkType: hard
 
@@ -13911,7 +13911,7 @@ __metadata:
     "@shared/dsl": "workspace:^"
     "@simonsmith/cypress-image-snapshot": ^9.1.0
     "@svgr/webpack": ^5.5.0
-    "@tanstack/virtual-core": ^3.0.0-beta.18
+    "@tanstack/virtual-core": ^3.17.4
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 12.1.2
     "@testing-library/react-hooks": ^8.0.1
