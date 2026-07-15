@@ -44,11 +44,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.appsmith.external.constants.ActionConstants.ACTION_CONFIGURATION_BODY;
+import static com.appsmith.external.models.Connection.Mode.READ_ONLY;
+import static com.appsmith.external.models.Connection.Mode.READ_WRITE;
 import static com.external.plugins.MssqlTestDBContainerManager.createDatasourceConfiguration;
 import static com.external.plugins.MssqlTestDBContainerManager.mssqlPluginExecutor;
 import static com.external.plugins.MssqlTestDBContainerManager.runSQLQueryOnMssqlTestDB;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -772,5 +775,41 @@ public class MssqlPluginTest {
                     assertEquals("localhost_1433", endpointIdentifier);
                 })
                 .verifyComplete();
+    }
+
+    @Test
+    public void testReadOnlyConnectionMode() {
+        DatasourceConfiguration dsConfig = createDatasourceConfiguration(container);
+
+        dsConfig.getConnection().setMode(READ_ONLY);
+
+        HikariDataSource connectionPool =
+                mssqlPluginExecutor.datasourceCreate(dsConfig).block();
+
+        assertNotNull(connectionPool);
+        String jdbcUrl = connectionPool.getJdbcUrl();
+        assertTrue(
+                jdbcUrl.contains("ApplicationIntent=ReadOnly"),
+                "JDBC URL should contain ApplicationIntent=ReadOnly parameter");
+
+        connectionPool.close();
+    }
+
+    @Test
+    public void testReadWriteConnectionMode() {
+        DatasourceConfiguration dsConfig = createDatasourceConfiguration(container);
+
+        dsConfig.getConnection().setMode(READ_WRITE);
+
+        HikariDataSource connectionPool =
+                mssqlPluginExecutor.datasourceCreate(dsConfig).block();
+
+        assertNotNull(connectionPool);
+        String jdbcUrl = connectionPool.getJdbcUrl();
+        assertFalse(
+                jdbcUrl.contains("ApplicationIntent"),
+                "JDBC URL should not contain ApplicationIntent parameter for READ_WRITE mode");
+
+        connectionPool.close();
     }
 }
