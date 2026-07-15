@@ -14,6 +14,10 @@ const AppsmithCaddy = process.env._APPSMITH_CADDY
 const isRateLimitingEnabled = process.env.APPSMITH_RATE_LIMIT !== "disabled"
 const RATE_LIMIT = parseInt(process.env.APPSMITH_RATE_LIMIT || 100, 10)
 
+// The MCP server is enabled by default; the /mcp route is dropped only when explicitly disabled. This script re-runs
+// on every editor (caddy) program restart, so the Admin Settings toggle takes effect on Save & Restart.
+const isMcpEnabled = !/^(false|0|no|off)$/i.test(process.env.APPSMITH_MCP_ENABLED ?? "")
+
 let certLocation = null
 if (CUSTOM_DOMAIN !== "") {
   try {
@@ -97,6 +101,11 @@ parts.push(`
   # The internal request ID header should never be accepted from an incoming request.
   request_header -X-Appsmith-Request-Id
 
+  # The MCP internal marker is minted only by the loopback MCP service; strip any inbound copy so an external
+  # client can never forge it to drive an mcp_ token straight against /api/v1 (decision D2). Applies to all routes
+  # (/api/*, /mcp, /rts/*) since this snippet is imported by every site block.
+  request_header -X-Appsmith-Mcp-Internal
+
   # Ref: https://stackoverflow.com/a/38191078/151048
   # We're only accepting v4 UUIDs today, in order to not make it too lax unless needed.
   @valid-request-id expression {header.X-Request-Id}.matches("(?i)^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$")
@@ -150,6 +159,15 @@ parts.push(`
   handle /rts/* {
     import reverse_proxy 8091
   }
+
+  ${isMcpEnabled ? `handle /mcp {
+    import reverse_proxy ${process.env.APPSMITH_MCP_PORT || 8092}
+  }
+
+  handle /mcp/health {
+    rewrite * /health
+    import reverse_proxy ${process.env.APPSMITH_MCP_PORT || 8092}
+  }` : ""}
 
   ${isRateLimitingEnabled ? `rate_limit {
     zone dynamic_zone {

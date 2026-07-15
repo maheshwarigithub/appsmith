@@ -6,6 +6,7 @@ DB_PASSWORD="$2"
 ENCRYPTION_PASSWORD="$3"
 ENCRYPTION_SALT="$4"
 REDIS_PASSWORD="${5:-}"
+MCP_INTERNAL_SECRET="${6:-}"
 
 cat <<EOF
 # Sentry
@@ -85,5 +86,18 @@ APPSMITH_JAVA_ARGS=
 APPSMITH_ALLOWED_FRAME_ANCESTORS="'self' *"
 
 APPSMITH_DISABLE_IFRAME_WIDGET_SANDBOX=false
+
+# MCP (Model Context Protocol) server: lets AI agents connect to this instance at /mcp using
+# per-user MCP tokens (Profile -> MCP tokens). Also editable from Admin Settings -> Configuration.
+# The server, the data layer (datasources/queries), and restricted JS objects are all on by default.
+APPSMITH_MCP_ENABLED=true
+APPSMITH_MCP_DATA_ENABLED=true
+APPSMITH_MCP_JS_ENABLED=true
+# How long a newly created/rotated MCP token stays valid (days). Default 90; range 1-3650.
+APPSMITH_MCP_TOKEN_TTL_DAYS=90
+# Internal marker secret the loopback MCP service stamps on its /api/v1 calls (X-Appsmith-Mcp-Internal). Shared by
+# the backend and the mcp process (both source this file). Auto-generated at first boot; keep it secret. Empty
+# disables MCP auth (fails closed). The name contains SECRET so /actuator/env masks it.
+APPSMITH_MCP_INTERNAL_SECRET=$MCP_INTERNAL_SECRET
 
 EOF

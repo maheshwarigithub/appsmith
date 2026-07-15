@@ -1,10 +1,12 @@
 package com.appsmith.server.configurations;
 
 import com.appsmith.external.exceptions.ErrorDTO;
+import com.appsmith.server.authentication.converters.McpTokenAuthenticationConverter;
 import com.appsmith.server.authentication.handlers.AccessDeniedHandler;
 import com.appsmith.server.authentication.handlers.AuthenticationFailureHandler;
 import com.appsmith.server.authentication.handlers.CustomServerOAuth2AuthorizationRequestResolver;
 import com.appsmith.server.authentication.handlers.LogoutSuccessHandler;
+import com.appsmith.server.authentication.managers.McpTokenAuthenticationManager;
 import com.appsmith.server.authentication.oauth2clientrepositories.CustomOauth2ClientRepositoryManager;
 import com.appsmith.server.constants.FieldName;
 import com.appsmith.server.constants.Url;
@@ -14,9 +16,11 @@ import com.appsmith.server.exceptions.AppsmithErrorCode;
 import com.appsmith.server.filters.ConditionalFilter;
 import com.appsmith.server.filters.LoginMetricsFilter;
 import com.appsmith.server.filters.LoginRateLimitFilter;
+import com.appsmith.server.filters.McpAllowlistWebFilter;
 import com.appsmith.server.helpers.RedirectHelper;
 import com.appsmith.server.ratelimiting.RateLimitService;
 import com.appsmith.server.services.AnalyticsService;
+import com.appsmith.server.services.UserMcpTokenService;
 import com.appsmith.server.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,6 +48,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
+import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
 import org.springframework.security.web.server.authentication.ServerAuthenticationEntryPointFailureHandler;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher;
@@ -127,7 +132,32 @@ public class SecurityConfig {
     @Value("${appsmith.internal.password}")
     private String INTERNAL_PASSWORD;
 
+    // MCP server enablement, read from the APPSMITH_MCP_ENABLED env variable (default on). When disabled from Admin
+    // Settings, the MCP bearer-auth filter must not engage — otherwise "disabling MCP" would leave already-issued
+    // mcp_ tokens working as full API credentials until they expire. Same deny-list spelling as the deploy scripts.
+    @Value("${APPSMITH_MCP_ENABLED:true}")
+    private String mcpEnabledFlag;
+
     private static final String INTERNAL = "INTERNAL";
+
+    private boolean isMcpEnabled() {
+        return mcpEnabledFlag == null || !mcpEnabledFlag.trim().matches("(?i)^(false|0|no|off)$");
+    }
+
+    // Whether the MCP bearer-auth filter should engage for this request. Evaluated PER REQUEST (not captured at bean
+    // construction) so flipping APPSMITH_MCP_ENABLED off immediately stops authenticating already-issued mcp_ tokens
+    // — the filter goes inert, the bearer is treated as an unrecognized credential and rejected (401). Returns false
+    // for non-MCP requests and whenever MCP is disabled, leaving the form-login flow untouched. Package-private for
+    // unit testing the runtime kill switch.
+    boolean isMcpAuthenticationRequest(ServerWebExchange exchange) {
+        if (!isMcpEnabled()) {
+            return false;
+        }
+        final String mcpBearerPrefix = "Bearer mcp_";
+        final String authorization = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        return authorization != null
+                && authorization.regionMatches(true, 0, mcpBearerPrefix, 0, mcpBearerPrefix.length());
+    }
 
     /**
      * This routerFunction is required to map /public/** endpoints to the
@@ -184,13 +214,48 @@ public class SecurityConfig {
 
     @Bean
     @SuppressWarnings("Convert2MethodRef") // Helps readability.
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(
+            ServerHttpSecurity http,
+            UserMcpTokenService userMcpTokenService,
+            McpTokenAuthenticationConverter mcpTokenAuthenticationConverter) {
         ServerAuthenticationEntryPointFailureHandler failureHandler =
                 new ServerAuthenticationEntryPointFailureHandler(authenticationEntryPoint);
+        // Construct the MCP auth manager here rather than injecting a bean: as the only ReactiveAuthenticationManager
+        // bean it would be auto-wired as the global default and break form-login.
+        McpTokenAuthenticationManager mcpTokenAuthenticationManager =
+                new McpTokenAuthenticationManager(userMcpTokenService, rateLimitService);
+        // Construct here (not a @Component) so it is added ONLY to this security chain: a @Component WebFilter is also
+        // auto-registered globally by WebHttpHandlerBuilder, running it a second time outside the chain. Matches the
+        // peer-filter convention (LoginMetricsFilter / LoginRateLimitFilter).
+        McpAllowlistWebFilter mcpAllowlistWebFilter = new McpAllowlistWebFilter();
+        AuthenticationWebFilter mcpTokenAuthenticationWebFilter =
+                new AuthenticationWebFilter(mcpTokenAuthenticationManager);
+        mcpTokenAuthenticationWebFilter.setServerAuthenticationConverter(mcpTokenAuthenticationConverter);
+        mcpTokenAuthenticationWebFilter.setAuthenticationFailureHandler(failureHandler);
+        // Only engage for requests that actually carry an MCP token. Without this, the filter's default "any
+        // exchange" matcher sits at AUTHENTICATION order alongside the form-login filter and breaks the login flow
+        // (No provider found for UsernamePasswordAuthenticationToken -> 500).
+        // The enabled-state is evaluated PER REQUEST (see isMcpAuthenticationRequest), not captured once here, so
+        // disabling APPSMITH_MCP_ENABLED takes effect immediately for already-issued mcp_ tokens without waiting on a
+        // bean/JVM rebuild — a real kill switch, not just a route removal.
+        mcpTokenAuthenticationWebFilter.setRequiresAuthenticationMatcher(
+                exchange -> isMcpAuthenticationRequest(exchange)
+                        ? ServerWebExchangeMatcher.MatchResult.match()
+                        : ServerWebExchangeMatcher.MatchResult.notMatch());
 
         csrfConfig.applyTo(http);
 
         return http.addFilterAt(this::sanityCheckFilter, SecurityWebFiltersOrder.FIRST)
+                // Add BEFORE the AUTHENTICATION slot (not AT it): placing a second AuthenticationWebFilter at the
+                // same order as form-login breaks its manager wiring (login -> 500). This runs the MCP bearer check
+                // just ahead of form-login and is inert for non-MCP requests (see the matcher above).
+                .addFilterBefore(mcpTokenAuthenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+                // Confine what an MCP-token-authenticated principal may reach on /api/v1 to the allowlist. Runs
+                // just before authorization, after the MCP auth filter has populated the reactive security context,
+                // so a valid mcp_ token hitting a non-allowlisted path/verb gets 403. Kept as a shared filter (not
+                // an authorizeExchange rule) so EE — whose authorizeExchange chain diverges — wires the identical
+                // control.
+                .addFilterBefore(mcpAllowlistWebFilter, SecurityWebFiltersOrder.AUTHORIZATION)
                 // Default security headers configuration from
                 // https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/headers.html
                 .headers(headerSpec -> headerSpec
