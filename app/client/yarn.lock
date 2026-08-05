@@ -14128,7 +14128,7 @@ __metadata:
     react-full-screen: ^1.1.0
     react-google-recaptcha: ^2.1.0
     react-helmet: ^5.2.1
-    react-hook-form: ^7.28.0
+    react-hook-form: ^7.84.0
     react-is: ^16.12.0
     react-json-view: ^1.21.3
     react-media-recorder: ^1.6.1
@@ -30219,12 +30219,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.28.0":
-  version: 7.28.0
-  resolution: "react-hook-form@npm:7.28.0"
+"react-hook-form@npm:^7.84.0":
+  version: 7.84.0
+  resolution: "react-hook-form@npm:7.84.0"
   peerDependencies:
-    react: ^16.8.0 || ^17
-  checksum: e70637236113b26bae121cccd6f1ad9df3bd808e5e83311175f69c1b55524ea5240d6914c1c355f6df2e38b27c2103f2b8b17d911409bcfce26cf6fb4107caee
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: f92b5ac5e20d8fc11ebd9f4f9a8d10016a646781c36a74312bcf85351da6e87015b8e79aae53f076736fa06a0031a3a8d2d874ef051b554f9aeb5ebef2b914d6
   languageName: node
   linkType: hard
 
