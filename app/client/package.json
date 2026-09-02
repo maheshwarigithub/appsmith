@@ -127,7 +127,7 @@
     "codemirror": "^5.65.13",
     "codemirror-graphql": "^1.2.14",
     "colorjs.io": "^0.5.2",
-    "copy-to-clipboard": "^3.3.1",
+    "copy-to-clipboard": "^4.0.2",
     "core-js": "^3.9.1",
     "cypress-log-to-output": "^1.1.2",
     "cypress-repeat-pro": "^1.0.9",
