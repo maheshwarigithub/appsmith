@@ -14003,7 +14003,7 @@ __metadata:
     css-minimizer-webpack-plugin: ^3.2.0
     cy-verify-downloads: ^0.0.5
     cypress: 13.13.0
-    cypress-file-upload: ^4.1.1
+    cypress-file-upload: ^5.0.8
     cypress-log-to-output: ^1.1.2
     cypress-mochawesome-reporter: ^3.5.1
     cypress-multi-reporters: ^1.2.4
@@ -17300,14 +17300,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-file-upload@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "cypress-file-upload@npm:4.1.1"
-  dependencies:
-    mime: ^2.4.4
+"cypress-file-upload@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "cypress-file-upload@npm:5.0.8"
   peerDependencies:
     cypress: ">3.0.0"
-  checksum: aebc3a208178c2cc92d4a90ee5e6f6617c8f8431e59c2c45ab99e55c9254671462a1c1bc434972dcd18f3adae15fda83288ac48f65b375fda42a2b9b81901466
+  checksum: 9c70ca7e0bb137d0ec0b8d38987219ce15b26ac3a40e3ed4e78e6ad4690392eab905586848eec6ad8edd42ee480e68ccc63007b2ebd0a02f4b3eca116ff017e3
   languageName: node
   linkType: hard
 
@@ -25886,7 +25884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime@npm:2.6.0, mime@npm:^2.4.4":
+"mime@npm:2.6.0":
   version: 2.6.0
   resolution: "mime@npm:2.6.0"
   bin:
