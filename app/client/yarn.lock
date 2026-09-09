@@ -9368,7 +9368,7 @@ __metadata:
   resolution: "@shared/ast@workspace:packages/ast"
   dependencies:
     "@rollup/plugin-commonjs": ^22.0.0
-    "@types/escodegen": ^0.0.7
+    "@types/escodegen": ^0.0.10
     "@types/jest": 29.0.3
     "@types/lodash": ^4.14.120
     "@typescript-eslint/eslint-plugin": ^5.25.0
@@ -11329,17 +11329,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/escodegen@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@types/escodegen@npm:0.0.10"
+  checksum: 270fb286cc2a901963ecab0273435ca30dbd1cbd69c9562be9826342888a938e30fd8446af0cd1c0a679420f5923d1ef10696c6fbad2a1e249d5f04a5ee43729
+  languageName: node
+  linkType: hard
+
 "@types/escodegen@npm:^0.0.6":
   version: 0.0.6
   resolution: "@types/escodegen@npm:0.0.6"
   checksum: 7b25aeedd48dbef68345224082c6bc774845cbfc1d9b2ce91a477130fe7ccabf33da126c1d6d55e5dfd838db429a7c80890628a167e5aa55b6a4620974da38d3
-  languageName: node
-  linkType: hard
-
-"@types/escodegen@npm:^0.0.7":
-  version: 0.0.7
-  resolution: "@types/escodegen@npm:0.0.7"
-  checksum: 19625e3f61096e989c851e5db9758636618fb841d6adb295494a46613f68b025cb79474401e7b25508506799f94adcb17bb04b4f355862671caf8002ca77af0d
   languageName: node
   linkType: hard
 
