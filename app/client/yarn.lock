@@ -14078,7 +14078,7 @@ __metadata:
     lottie-web: ^5.7.4
     mammoth: ^1.11.0
     memoize-one: ^6.0.0
-    micro-memoize: ^4.0.10
+    micro-memoize: ^5.2.0
     microdiff: ^1.4.0
     mini-css-extract-plugin: ^2.4.5
     mixpanel-browser: ^2.55.1
@@ -19867,6 +19867,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-equals@npm:^5.4.0":
+  version: 5.4.3
+  resolution: "fast-equals@npm:5.4.3"
+  checksum: e3e171c7fc3fa7249ba4655b83f73e4c48e005c8606165efaf053d60118c1354970fa73ae3786f386afca6002f1973d80e3a8c7cd9cf71b61635f97b5a75abf3
+  languageName: node
+  linkType: hard
+
 "fast-glob@npm:^3.0.3, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
@@ -19912,6 +19919,13 @@ __metadata:
   version: 3.4.0
   resolution: "fast-sort@npm:3.4.0"
   checksum: b925d68438629b7176dc52c6f5bb88162675e88286b6e06041c6fb1095ec44af6aac3edd5b7e09ada044b90bced078a013683d2d75337ae6f5e7224f7e073019
+  languageName: node
+  linkType: hard
+
+"fast-stringify@npm:^4.0.0":
+  version: 4.0.2
+  resolution: "fast-stringify@npm:4.0.2"
+  checksum: a86b418c7634247a99e7cb85c22b521f203494c8d7c7fbaef3a0249c3cb9fa8dcf54fd7d38a70b969f512a2526439b2ca4851618c00e3fded4c381265bf87c69
   languageName: node
   linkType: hard
 
@@ -25477,10 +25491,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micro-memoize@npm:^4.0.10":
-  version: 4.0.14
-  resolution: "micro-memoize@npm:4.0.14"
-  checksum: 9a1c236c3e626b9a0cf323cd7ede18f972fd4474f1bcdea8e1340d9a49a1fee629f60d35baa2df8ba0d880230886d92587525d4b9c9dc14100cc39545506e1b9
+"micro-memoize@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "micro-memoize@npm:5.2.0"
+  dependencies:
+    fast-equals: ^5.4.0
+    fast-stringify: ^4.0.0
+  checksum: aa4e515195ac598583b80a2b763410ea506c4136ee95fd5bbbedb00051b81cd077a56d9eddebb6266d550ba91912cf6c985f266912e4ac09934a911ef8db83b8
   languageName: node
   linkType: hard
 
