@@ -11287,10 +11287,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/deep-diff@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@types/deep-diff@npm:1.0.0"
-  checksum: 2e92001a63612f93ed32c53ea18794106e6a5bb10005d569b39e2c5657c90121208bc562f25687caf004b55a698a1084b53183bc060607d9f8ddeb80ccd12f68
+"@types/deep-diff@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@types/deep-diff@npm:1.0.5"
+  checksum: 84504a725a3e79fc5410184d4d94fd8fae05b673e03fc4250998ea48c1f5c862dfedb9a227200b495b5979ed90288b291d739b65cea5792de9e47caff6630cc2
   languageName: node
   linkType: hard
 
@@ -13920,7 +13920,7 @@ __metadata:
     "@types/babel__standalone": ^7.1.7
     "@types/codemirror": ^0.0.96
     "@types/d3-geo": ^3.1.0
-    "@types/deep-diff": ^1.0.0
+    "@types/deep-diff": ^1.0.5
     "@types/dom-view-transitions": ^1.0.5
     "@types/downloadjs": ^1.4.2
     "@types/estree": ^1.0.6
