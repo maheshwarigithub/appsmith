@@ -169,7 +169,7 @@
     "nanoid": "3.3.11",
     "node-forge": "^1.4.0",
     "object-hash": "^3.0.0",
-    "openai": "4.87.3",
+    "openai": "7.32.0",
     "path-to-regexp": "^6.3.0",
     "pluralize": "^8.0.0",
     "popper.js": "^1.15.0",
