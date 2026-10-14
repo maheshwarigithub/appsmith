@@ -60,7 +60,7 @@ __metadata:
     "@react-stately/toggle": ^3.4.4
     "@react-types/textfield": ^3.9.6
     "@types/react-datepicker": ^4.10.0
-    "@xstyled/styled-components": ^3.8.0
+    "@xstyled/styled-components": ^4.1.1
     "@xstyled/system": ^3.8.1
     csstype: ^3.1.2
     date-fns: ^2.29.3
@@ -3149,19 +3149,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:^1.1.0":
-  version: 1.2.1
-  resolution: "@emotion/is-prop-valid@npm:1.2.1"
+"@emotion/is-prop-valid@npm:^1.1.0, @emotion/is-prop-valid@npm:^1.2.2":
+  version: 1.4.0
+  resolution: "@emotion/is-prop-valid@npm:1.4.0"
   dependencies:
-    "@emotion/memoize": ^0.8.1
-  checksum: 8f42dc573a3fad79b021479becb639b8fe3b60bdd1081a775d32388bca418ee53074c7602a4c845c5f75fa6831eb1cbdc4d208cc0299f57014ed3a02abcad16a
-  languageName: node
-  linkType: hard
-
-"@emotion/memoize@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "@emotion/memoize@npm:0.8.1"
-  checksum: a19cc01a29fcc97514948eaab4dc34d8272e934466ed87c07f157887406bc318000c69ae6f813a9001c6a225364df04249842a50e692ef7a9873335fbcc141b0
+    "@emotion/memoize": ^0.9.0
+  checksum: 6b003cdc62106c2d5d12207c2d1352d674339252a2d7ac8d96974781d7c639833f35d22e7e331411795daaafa62f126c2824a4983584292b431e08b42877d51e
   languageName: node
   linkType: hard
 
@@ -13283,36 +13276,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xstyled/core@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "@xstyled/core@npm:3.8.0"
+"@xstyled/core@npm:^3.8.2":
+  version: 3.8.2
+  resolution: "@xstyled/core@npm:3.8.2"
   dependencies:
-    "@xstyled/system": ^3.8.0
+    "@xstyled/system": ^3.8.2
     "@xstyled/util": ^3.7.0
-  checksum: 61c79515d98c7a819001521ff67a21d3f18fd5dacd06b2a21f57d36807623d5e6aa1caf678f0a9964e800376b7a7646819025dd0fdf7d5597f82c921e4bef14d
+  checksum: 9c69c9127121aa24df90d57204738b18ed1a162d53efa5247e52a3f123542878ef860a0d4fc191958417b5ffc517c53b3280044667179dd70471795287919f8e
   languageName: node
   linkType: hard
 
-"@xstyled/styled-components@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "@xstyled/styled-components@npm:3.8.0"
+"@xstyled/styled-components@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@xstyled/styled-components@npm:4.1.1"
   dependencies:
-    "@xstyled/core": ^3.8.0
-    "@xstyled/system": ^3.8.0
+    "@emotion/is-prop-valid": ^1.2.2
+    "@xstyled/core": ^3.8.2
+    "@xstyled/system": ^3.8.3
     "@xstyled/util": ^3.7.0
   peerDependencies:
-    styled-components: ^4.0.0 || ^5.0.0
-  checksum: 2c23732adc1ac10d4326374d64f6a9af58c1fde603584d805d6b55748b07c2915d8ec0a3df43a264ace54e149bc020ab15cbb810369c7f2269518eca014194b1
+    styled-components: ^6.1.11
+  checksum: 90a78ae54a0720b5b61e238429803f042725741f9890fe0e282dbce76f2d4fab372d875a0f9891c72c25c9146dc7f8367be10ee5c09d6b1a099fb79c898d3f3f
   languageName: node
   linkType: hard
 
-"@xstyled/system@npm:^3.8.0, @xstyled/system@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@xstyled/system@npm:3.8.1"
+"@xstyled/system@npm:^3.8.1, @xstyled/system@npm:^3.8.2, @xstyled/system@npm:^3.8.3":
+  version: 3.8.3
+  resolution: "@xstyled/system@npm:3.8.3"
   dependencies:
     "@xstyled/util": ^3.7.0
     csstype: ^3.1.1
-  checksum: db1721342f60c0a0556e756c6f4f0bb06578e4116750ed0fc132578f03787281e0449362185ceae076ef9b9dade4b1effdc8257b2bedecd4ec22a18a3e1de097
+  checksum: b0e4114ec5c3e735a962300664907e88130e1b653be599857c083d63d300e62b001eda3700be98ee343365352cf500a48d554928f5f3d83d194312ca4c9a9733
   languageName: node
   linkType: hard
 
