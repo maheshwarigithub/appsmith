@@ -67,7 +67,7 @@ __metadata:
     overlayscrollbars: ^2.7.2
     overlayscrollbars-react: ^0.5.6
     rc-select: ^14.4.3
-    rc-table: ^7.35.2
+    rc-table: ^7.55.1
     rc-tooltip: ^5.3.1
     react-datepicker: ^4.10.0
     react-toastify: 9.0.3
@@ -29677,20 +29677,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-table@npm:^7.35.2":
-  version: 7.35.2
-  resolution: "rc-table@npm:7.35.2"
+"rc-table@npm:^7.55.1":
+  version: 7.55.1
+  resolution: "rc-table@npm:7.55.1"
   dependencies:
     "@babel/runtime": ^7.10.1
     "@rc-component/context": ^1.4.0
     classnames: ^2.2.5
     rc-resize-observer: ^1.1.0
-    rc-util: ^5.37.0
-    rc-virtual-list: ^3.11.1
+    rc-util: ^5.44.3
+    rc-virtual-list: ^3.14.2
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: eb9c7dc7844354f53a907f626493a89443e6b33e9a87875315b66fdd1cee8089f1725b67b55dee89031a898b486fab66a8df88025327cd4fa7ff7477379b874e
+  checksum: b6097104316fc2d79d3fc5c6859f428468a45b30bb6fe121979f0c8815a7349dea61ee737ffed98d7840cc077ce24f0a04860024c167f2ff58f1ef538d06b482
   languageName: node
   linkType: hard
 
@@ -29756,31 +29756,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-util@npm:^5.16.1, rc-util@npm:^5.19.2, rc-util@npm:^5.2.1, rc-util@npm:^5.24.4, rc-util@npm:^5.27.0, rc-util@npm:^5.29.2, rc-util@npm:^5.3.0, rc-util@npm:^5.36.0, rc-util@npm:^5.37.0, rc-util@npm:^5.38.0, rc-util@npm:^5.5.1":
-  version: 5.38.0
-  resolution: "rc-util@npm:5.38.0"
+"rc-util@npm:^5.16.1, rc-util@npm:^5.19.2, rc-util@npm:^5.2.1, rc-util@npm:^5.24.4, rc-util@npm:^5.27.0, rc-util@npm:^5.29.2, rc-util@npm:^5.3.0, rc-util@npm:^5.36.0, rc-util@npm:^5.38.0, rc-util@npm:^5.44.3, rc-util@npm:^5.5.1":
+  version: 5.44.4
+  resolution: "rc-util@npm:5.44.4"
   dependencies:
     "@babel/runtime": ^7.18.3
     react-is: ^18.2.0
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 97a3e1dd94e199c12e69eed1f69e9a9be39b383f2b0d9e1d52d6fcdf676e91e6499fa7be4c48f37b08b6500747f2dc41014f9be54351a39f23b3b5087360690c
+  checksum: 28d8597b54b6f713a2f0345569f37abe6e8ccf68d42190d9cc494c26790e474ad13eaa6948c6a1f410112392b082a51d4e6e3d9e3deb3132bfbf6dda267ce322
   languageName: node
   linkType: hard
 
-"rc-virtual-list@npm:^3.11.1, rc-virtual-list@npm:^3.2.0, rc-virtual-list@npm:^3.4.13, rc-virtual-list@npm:^3.4.8":
-  version: 3.11.2
-  resolution: "rc-virtual-list@npm:3.11.2"
+"rc-virtual-list@npm:^3.14.2, rc-virtual-list@npm:^3.2.0, rc-virtual-list@npm:^3.4.13, rc-virtual-list@npm:^3.4.8":
+  version: 3.19.2
+  resolution: "rc-virtual-list@npm:3.19.2"
   dependencies:
     "@babel/runtime": ^7.20.0
     classnames: ^2.2.6
     rc-resize-observer: ^1.0.0
     rc-util: ^5.36.0
   peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: b642e55ca2c4b56fb2048b5151a17e2f0f1c15cf3f4d8a26a4f1f370c95a6f4476743886b6633f083f107c82fbe86c5548bbf37b7e2f8b79615d90b62777824e
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: f1d77d975dc92e64f83d3b9427998e93324b7274b4297034e6d0608a5096a6784276a76b1500b9f9031f87aeb92ce9f2240c238d820237a12ee1296781388214
   languageName: node
   linkType: hard
 
