@@ -14089,7 +14089,7 @@ __metadata:
     nanoid: 3.3.11
     node-forge: ^1.4.0
     object-hash: ^3.0.0
-    openai: 4.87.3
+    openai: 7.38.0
     path-to-regexp: ^6.3.0
     pg: ^8.11.3
     plop: ^3.1.1
@@ -27134,7 +27134,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openai@npm:4.87.3, openai@npm:^4.83.0":
+"openai@npm:7.38.0":
+  version: 7.38.0
+  resolution: "openai@npm:7.38.0"
+  peerDependencies:
+    "@aws-sdk/credential-provider-node": ">=3.972.0 <4"
+    "@smithy/hash-node": ">=4.3.0 <5"
+    "@smithy/signature-v4": ">=5.4.0 <6"
+    undici: ">=5 <9"
+    ws: ^8.21.0
+    zod: ^3.25 || ^4.0
+  peerDependenciesMeta:
+    "@aws-sdk/credential-provider-node":
+      optional: true
+    "@smithy/hash-node":
+      optional: true
+    "@smithy/signature-v4":
+      optional: true
+    undici:
+      optional: true
+    ws:
+      optional: true
+    zod:
+      optional: true
+  checksum: c0deeb2889ad111237c49202d92fa9173d24f415f6ca0694e74e9c2b0081fa93e0adb0bfdd74d4b0e4da0b5fd35372bdfc9aa243429d198594b04fbdad7b9649
+  languageName: node
+  linkType: hard
+
+"openai@npm:^4.83.0":
   version: 4.87.3
   resolution: "openai@npm:4.87.3"
   dependencies:
