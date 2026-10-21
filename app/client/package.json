@@ -170,7 +170,7 @@
     "node-forge": "^1.4.0",
     "object-hash": "^3.0.0",
     "openai": "4.87.3",
-    "path-to-regexp": "^6.3.0",
+    "path-to-regexp": "^8.4.2",
     "pluralize": "^8.0.0",
     "popper.js": "^1.15.0",
     "prismjs": "^1.30.0",
