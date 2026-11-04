@@ -3019,7 +3019,7 @@ __metadata:
     "@storybook/addon-toolbars": 8.2.7
     "@storybook/addon-viewport": 8.2.7
     "@storybook/blocks": 8.2.7
-    "@storybook/components": 8.2.7
+    "@storybook/components": 8.6.14
     "@storybook/core-events": 8.2.7
     "@storybook/manager-api": 8.2.7
     "@storybook/preset-create-react-app": 8.2.7
@@ -10276,12 +10276,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:8.2.7, @storybook/components@npm:^8.2.7":
-  version: 8.2.7
-  resolution: "@storybook/components@npm:8.2.7"
+"@storybook/components@npm:8.6.14, @storybook/components@npm:^8.2.7":
+  version: 8.6.14
+  resolution: "@storybook/components@npm:8.6.14"
   peerDependencies:
-    storybook: ^8.2.7
-  checksum: 1a4023cb8442abbdc69bf32ae14b2441d56fbd9083cd5e0b8e4cc5e40f1e1e61edbca19b22acb20d006c9af5b39debfe20d93df0f0a921c0c26050b5ae220ec2
+    storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+  checksum: d3647505510313aa3c32fd1f8f202eda723ad99bd353b20aa929c5ecab4edc3c86ad06d0eac02f3c6d948e88f13f65ca5fa35ef27c079ef1b92abe8692f23699
   languageName: node
   linkType: hard
 
